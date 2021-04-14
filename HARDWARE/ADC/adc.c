@@ -32,18 +32,16 @@ int i=0;
  *
 */
 
-		void ADCx_Init(ADC_TypeDef * ADCx ,uint8_t Channel )
-		{
-			GPIO_InitTypeDef GPIO_InitStructure;
-			ADC_InitTypeDef   ADC_InitStructure;
+	void ADCx_Init(ADC_TypeDef * ADCx ,uint8_t Channel )
+	{
+		GPIO_InitTypeDef GPIO_InitStructure;
+		ADC_InitTypeDef   ADC_InitStructure;
 
-	
-	
 		if(ADCx == ADC1)            RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC1, ENABLE);
 		else if(ADCx == ADC2)       RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC2, ENABLE);
 		else if(ADCx == ADC3)       RCC_APB2PeriphClockCmd(RCC_APB2Periph_ADC3, ENABLE);
 			
-	  if(Channel == ADC_Channel_0)          GPIO_Set(GPIOA,GPIO_Pin_0,GPIO_Mode_AIN,(GPIOSpeed_TypeDef)0);
+	        if(Channel == ADC_Channel_0)          GPIO_Set(GPIOA,GPIO_Pin_0,GPIO_Mode_AIN,(GPIOSpeed_TypeDef)0);
 		else if(Channel == ADC_Channel_1)     GPIO_Set(GPIOA,GPIO_Pin_1,GPIO_Mode_AIN,(GPIOSpeed_TypeDef)0);
 		else if(Channel == ADC_Channel_2)     GPIO_Set(GPIOA,GPIO_Pin_2,GPIO_Mode_AIN,(GPIOSpeed_TypeDef)0);
 		else if(Channel == ADC_Channel_3)     GPIO_Set(GPIOA,GPIO_Pin_3,GPIO_Mode_AIN,(GPIOSpeed_TypeDef)0);
@@ -61,19 +59,19 @@ int i=0;
 		else if(Channel == ADC_Channel_15)    GPIO_Set(GPIOC,GPIO_Pin_5,GPIO_Mode_AIN,(GPIOSpeed_TypeDef)0);
 
  
-    ADC_DeInit(ADCx);
+          ADC_DeInit(ADCx);
 
 
-			// ADC Structure Initialization
-			ADC_StructInit(&ADC_InitStructure);
+		// ADC Structure Initialization
+		ADC_StructInit(&ADC_InitStructure);
 
-			ADC_InitStructure.ADC_Mode = ADC_Mode_Independent;
-			ADC_InitStructure.ADC_ScanConvMode = ENABLE;
-			ADC_InitStructure.ADC_ContinuousConvMode = ENABLE;
-			ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None;
-			ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
-			ADC_InitStructure.ADC_NbrOfChannel = 1;
-			ADC_Init(ADC1, &ADC_InitStructure);
+		ADC_InitStructure.ADC_Mode = ADC_Mode_Independent;
+		ADC_InitStructure.ADC_ScanConvMode = ENABLE;
+		ADC_InitStructure.ADC_ContinuousConvMode = ENABLE;
+		ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None;
+		ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
+		ADC_InitStructure.ADC_NbrOfChannel = 1;
+		ADC_Init(ADC1, &ADC_InitStructure);
 
 		// Enable the ADC
 		ADC_Cmd(ADCx, ENABLE);
@@ -115,8 +113,7 @@ int i=0;
 		u32 adc =0;
 		for( i=0;i<n;i++)
 		{
-				adc+=Get_ADCx(ADC1,ADC_Channel_1); delay_ms(5);
+		   adc+=Get_ADCx(ADC1,ADC_Channel_1); delay_ms(5);
 		}
-		
 		return adc/n;
 	}
